@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "TreeSpecies": {
+      "title": "TreeSpecies",
+      "description": "Represents a tree species found on forestry land.",
+      "type": "object",
+      "properties": {
+        "commonName": { "type": "string", "description": "Common name of the tree" },
+        "scientificName": { "type": "string", "description": "Scientific botanical name" },
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" },
+            "description": { "type": "string", "description": "Human readable location description" }
+          },
+          "required": ["description"]
+        },
+        "researchTopics": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "description": { "type": "string" },
+        "researchSummary": { "type": "string", "description": "Detailed research data in Markdown" },
+        "imageUrl": { "type": "string", "format": "url" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["commonName", "scientificName", "location"]
+    },
+    "LibraryItem": {
+      "title": "LibraryItem",
+      "description": "Represents a book or research paper in the archive.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "type": { "type": "string", "enum": ["book", "paper", "thesis"] },
+        "location": { "type": "string", "description": "Library building or section" },
+        "shelf": { "type": "string" },
+        "year": { "type": "number" },
+        "abstract": { "type": "string", "description": "Short summary of the paper" },
+        "downloadUrl": { "type": "string", "format": "url", "description": "Link to PDF or document" }
+      },
+      "required": ["title", "author", "type", "location", "shelf"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Represents a user of the application.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "admin"] }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/species/{speciesId}": {
+      "schema": "TreeSpecies",
+      "description": "Catalog of tree species on forestry land."
+    },
+    "/library/{itemId}": {
+      "schema": "LibraryItem",
+      "description": "Catalog of items available in the research library."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and permissions."
+    }
+  }
+}

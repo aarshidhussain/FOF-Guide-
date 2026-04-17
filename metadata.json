@@ -1,0 +1,8 @@
+{
+  "name": "Welcome to Forestry",
+  "description": "A comprehensive digital guide. Explore forest tree species, access research data, and locate library resources effortlessly.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}
